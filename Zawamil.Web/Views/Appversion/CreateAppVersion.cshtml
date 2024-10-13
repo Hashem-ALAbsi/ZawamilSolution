@@ -1,0 +1,67 @@
+﻿@using Zawamil.Web.Models.Users
+@model CreateAppVersionModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = Model == null ? "CreateAppVersion" : "UpdateAppVersion";
+}
+
+
+<h1> @ViewData["Title"]</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="@ViewData["Title"]" id="myForm" onsubmit="sendquestion(event)">
+            <div asp-validation-summary="ModelOnly" class="text-danger">
+                <input asp-for="Id" hidden />
+            </div>
+            @if (Model != null)
+            {
+                <div class="form-group">
+                    <label asp-for="Id" class="control-label"></label>
+                    <input asp-for="Id" class="form-control" type="number" readonly />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>
+            }
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <hr />
+            <div class="form-group">
+                <input type="submit" value="@ViewData["Title"]" class="btn btn-success form-control" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="form-group">
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+@section Scripts {
+    <script>
+        function sendquestion(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Do You want this ?',
+                icon: 'question',
+                showCancelButton: true,
+
+            }).then(resulte => {
+                if (resulte.isConfirmed) {
+                    const myForm = document.getElementById('myForm');
+                    myForm.submit();
+                }
+            })
+        }
+    </script>
+    <partial name="_ValidationScriptsPartial" />
+}
+@*
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+} *@

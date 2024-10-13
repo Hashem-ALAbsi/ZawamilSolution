@@ -1,0 +1,96 @@
+﻿@using Zawamil.Web.Models.Users.DTOs
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+	ViewData["Title"] = "UserList";
+
+}
+@model IEnumerable<UserModel>
+
+<div class="card shadow border-0 mt-4">
+	<div class="card-header bg-secondary bg-gradient ml-0 py-3">
+		<div class="row">
+			<div class="col-12 text-center">
+				<h1 class="text-white">User List</h1>
+			</div>
+		</div>
+	</div>
+	<div class="card-body p-4">
+		<div class="row pb-3">
+			<div class="col-6">
+			</div>
+			<div class="col-6 text-end">
+				<a asp-action="CreateUsers" class="btn btn-outline-primary"><i class="bi bi-plus-square"></i> Create New user</a>
+
+			</div>
+		</div>
+		<div class="table-responsive">
+			<table class="table table-striped" id="Userstatable">
+			<thead>
+				<tr>
+					<th>
+						User Name
+					</th>
+					<th>
+						Password
+					</th>
+					<th>
+						CreateAt
+					</th>
+					<th>
+						User State
+					</th>
+					<th>
+						User Role
+					</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					<tr>
+						<td>
+							@(item.UserName)
+						</td>
+						<td>
+							@(item.Password)
+						</td>
+						<td>
+							@(item.CreatedAt)
+						</td>
+						<td>
+							@(item.UserState)
+						</td>
+						<td>
+							@(item.UserRole)
+						</td>
+						<td>
+							<a asp-action="DetelsUser" asp-route-userId="@item.Id" class="btn btn-warning">
+								Detels
+							</a>|
+				            <a asp-action="UpdateUser" asp-route-userId="@item.Id" class="btn btn-primary">
+								Update
+							</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+		</<div>
+	</div>
+
+</div>
+@section scripts {
+    <link href="https://cdn.datatables.net/v/dt/dt-1.13.6/af-2.6.0/datatables.min.css" rel="stylesheet">
+
+    <script src="https://cdn.datatables.net/v/dt/dt-1.13.6/af-2.6.0/datatables.min.js"></script>
+
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>*@
+    <script>
+        new DataTable("#Userstatable");
+    </script>
+
+
+}

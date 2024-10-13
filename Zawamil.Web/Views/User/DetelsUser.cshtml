@@ -1,0 +1,161 @@
+﻿@using Zawamil.Web.Models.Users.DTOs
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "DetelsUser";
+}
+@model UserModel
+
+<h1>Details</h1>
+<form asp-action="DetelsUser">
+<div>
+    <h4>DetelsUser</h4>
+        <input asp-for="Id" hidden />
+    <hr />
+    <dl class="row">
+            <div class="col-md-4">
+        <dd class="col-sm-10">
+                <input asp-for="Id" disabled class="form-control" />
+        </dd>
+        <dd class="col-sm-10">
+                <input asp-for="UserName" disabled class="form-control" />
+        </dd>
+        <dd class="col-sm-10">
+                <input asp-for="Password" disabled class="form-control" />
+        </dd>
+        <dd class="col-sm-10">
+                <input asp-for="CreatedAt" disabled class="form-control" />
+        </dd>
+        <dd class="col-sm-10">
+                <input asp-for="UserState" disabled class="form-control" />
+        </dd>
+        <dd class="col-sm-10">
+                <input asp-for="UserRole" disabled class="form-control" />
+        </dd>
+       </div>
+    </dl>
+</div>
+</form>
+<div class="form-group">
+    <a onclick="activateUser('@Model.Id','AdminUser')" class="btn btn-outline-success">
+            Admin/Client
+        </a>
+    <a onclick="activateUser('@Model.Id','ActiveUser')" class="btn btn-outline-danger">
+            Active/Locked
+        </a>
+</div>
+<div class="form-group">
+    <a asp-action="UserIndex">Back to List</a>
+</div>
+
+@* <form asp-action="DetelsUser">
+    <br />
+    <div class="container border p-3">
+        <h1 class="text-black text-center">Detels User</h1>
+        <input asp-for="Id" hidden />
+        <hr />
+        <div class="row">
+            <div class="col-2">
+                <label class="control-label pt-2" style="font-size:20px;"> Id</label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="Id" disabled class="form-control" />
+            </div>
+            <div class="col-2">
+                <label class="control-label pt-2" style="font-size:20px;">UserName</label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="UserName" disabled class="form-control" />
+            </div>
+            <div class="col-2">
+                <label class="control-label pt-2" style="font-size:20px;">Password</label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="Password" disabled class="form-control" />
+            </div>
+            <div class="col-2">
+                <label class="control-label pt-2" style="font-size:20px;">CreatedAt</label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="CreatedAt" disabled class="form-control" />
+            </div>
+            <div class="col-2">
+                <label class="control-label pt-2" style="font-size:20px;">UserState</label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="UserState" disabled class="form-control" />
+            </div>
+            <div class="col-2">
+                <label class="control-label pt-2" style="font-size:20px;">UserRole</label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="UserRole" disabled class="form-control" />
+            </div>
+            <div class="col-5">
+                <a onclick="activateUser('@Model.Id','AdminUser')" class="btn btn-outline-success form-control">
+                    Admin/Client
+                </a>
+            </div>
+            <div class="col-5">
+                <a onclick="activateUser('@Model.Id','ActiveUser')" class="btn btn-outline-danger form-control">
+                    Active/Locked
+                </a>
+
+             
+            </div>
+            <div class="col-5 offset-2">
+                <a asp-action="UserIndex" class="btn-primary btn form-control ">Back to List</a>
+            </div>
+            
+
+        </div>
+
+        <div>
+        </div>
+    </div>
+</form> *@
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function activateUser(userId,url) {
+            Swal.fire({
+                title: 'Do You want this ?',
+                icon: 'question',
+                showCancelButton: true,
+            }).then(result => {
+                if (result.isConfirmed) {
+                    window.location.href = '/User/'+url+'?id=' + userId; 
+                }
+            });
+        }
+        function sendquestion(e) {
+            e.preventDefault();
+             Swal.fire({
+                title: 'Do You want this ?',
+                icon: 'question',
+                showCancelButton: true,
+
+            }).then(resulte => {
+                if (resulte.isConfirmed) {
+                    const myForm = document.getElementById('myForm');
+                    myForm.submit();
+                }
+            })
+        }
+    </script>
+}
+
+@* <div class="col-5">
+    <input type="submit" value="Active/Locked" class="btn btn-danger form-control" />
+</div> *@
+@* <div>
+    <button class="back-button" onclick="goBack()">العودة</button>
+</div> *@
+@* <script>
+    function goBack() {
+        window.history.go(-2);
+        //window.history.back();
+    }
+</script> *@
